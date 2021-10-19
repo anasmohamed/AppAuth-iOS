@@ -143,7 +143,7 @@ NS_ASSUME_NONNULL_BEGIN
   if ([stringUrl localizedCaseInsensitiveContainsString:@"signup"]) {
     return  NO;
   }
-  if ([stringUrl localizedCaseInsensitiveContainsString:@"verify"]) {
+  if ([stringUrl localizedCaseInsensitiveContainsString:@"navigateToMobileVerification"]) {
         return  NO;
     }
   return  YES;
