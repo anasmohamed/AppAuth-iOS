@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)shouldHandleURL:(NSURL *)URL {
   BOOL checkRedirectFlow = [self checkUrlForRedirectionFlow:URL];
   NSString *stringUrl = URL.absoluteString;
-
+  NSLog(URL.absoluteString);
   if (!checkRedirectFlow) {
     [_externalUserAgent dismissExternalUserAgentAnimated:YES completion:^{
         NSError *error = [OIDErrorUtilities errorWithCode:OIDErrorCodeUserCanceledAuthorizationFlow
