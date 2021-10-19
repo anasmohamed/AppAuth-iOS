@@ -136,7 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
   NSString *stringUrl = URL.absoluteString;
   NSLog(URL.absoluteString);
   NSLog(@"%@anas****", URL.absoluteString);
-  NSLog("What is your name?");
+  NSLog(@"What is your name?");
   if ([stringUrl localizedCaseInsensitiveContainsString:@"forgetPassword"]) {
     return  NO;
   }
