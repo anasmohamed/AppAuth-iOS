@@ -134,7 +134,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 - (BOOL)checkUrlForRedirectionFlow:(NSURL *)URL {
   NSString *stringUrl = URL.absoluteString;
-  NSLog(@URL.absoluteString);
+  NSLog(URL.absoluteString);
   if ([stringUrl localizedCaseInsensitiveContainsString:@"forgetPassword"]) {
     return  NO;
   }
