@@ -117,9 +117,41 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (BOOL)shouldHandleURL:(NSURL *)URL {
+  BOOL checkRedirectFlow = [self checkUrlForRedirectionFlow:URL];
+  NSString *stringUrl = URL.absoluteString;
+  NSLog(URL.absoluteString);
+  if (!checkRedirectFlow) {
+    [_externalUserAgent dismissExternalUserAgentAnimated:YES completion:^{
+        NSError *error = [OIDErrorUtilities errorWithCode:OIDErrorCodeUserCanceledAuthorizationFlow
+                                          underlyingError:nil
+                                              description:[stringUrl lastPathComponent]];
+        [self didFinishWithResponse:nil error:error];
+        
+    }];
+    return NO;
+  }
   return [[self class] URL:URL matchesRedirectionURL:_request.redirectURL];
 }
-
+- (BOOL)checkUrlForRedirectionFlow:(NSURL *)URL {
+  NSString *stringUrl = URL.absoluteString;
+  NSLog(URL.absoluteString);
+  NSLog(@"%@anas****", URL.absoluteString);
+  NSLog(@"What is your name?");
+  if ([stringUrl localizedCaseInsensitiveContainsString:@"forgetPassword"]) {
+    return  NO;
+  }
+  if ([stringUrl localizedCaseInsensitiveContainsString:@"logAsGuest"]) {
+    return  NO;
+  }
+  if ([stringUrl localizedCaseInsensitiveContainsString:@"signup"]) {
+    return  NO;
+  }
+  if ([stringUrl localizedCaseInsensitiveContainsString:@"navigateToMobileVerification"]) {
+        return  NO;
+    }
+  return  YES;
+  
+}
 - (BOOL)resumeExternalUserAgentFlowWithURL:(NSURL *)URL {
   // rejects URLs that don't match redirect (these may be completely unrelated to the authorization)
   if (![self shouldHandleURL:URL]) {
